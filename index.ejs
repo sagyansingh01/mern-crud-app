@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Management</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📘 Student Management</h1>
+
+    <% if (typeof error !== "undefined" && error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <!-- Add Student Form -->
+    <form action="/add" method="POST" class="form">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="number" name="age" placeholder="Age" required>
+      <input type="date" name="dob" required>
+      <input type="text" name="course" placeholder="Course" required>
+      <input type="text" name="roll_no" placeholder="Roll No" required>
+      <button type="submit">➕ Add Student</button>
+    </form>
+
+    <!-- Student Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Date of Birth</th>
+          <th>Course</th>
+          <th>Roll No</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach(student => { %>
+          <tr>
+            <td><%= student.name %></td>
+            <td><%= student.age %></td>
+            <td><%= student.dob.toDateString() %></td>
+            <td><%= Array.isArray(student.course) ? student.course.join(', ') : student.course %></td>
+            <td><%= student.roll_no %></td>
+            <td>
+              <a href="/edit/<%= student._id %>" class="btn-edit">✏ Edit</a>
+              <a href="/delete/<%= student._id %>" class="btn-delete" onclick="return confirm('Delete this student?');">🗑 Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
