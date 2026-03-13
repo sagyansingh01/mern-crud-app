@@ -97,7 +97,7 @@ Route	Method	Description
 /update/:id	POST	Update student details
 /delete/:id	GET	Delete a student
 /debug/student/:id	GET	Show raw student JSON
-⚠ Error Handling
+Error Handling
 
 The application handles common errors such as:
 
